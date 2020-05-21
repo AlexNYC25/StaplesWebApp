@@ -1,10 +1,21 @@
+//use express.js for web
 const express = require('express');
+// handlbars engine handling
+const hbs = require('express-handlebars');
 
 let app = express();
 
+
+app.use(express.static('/public'))
+
+// sets handlebars engine as view engine
+app.engine('handlebars', hbs());
+app.set('view engine', 'handlebars');
+
+
 app.get('/', (req, res) => {
-    res.send('Hello World')
-})
+    res.render('home');
+});
 
 
 app.listen(3000, function () {

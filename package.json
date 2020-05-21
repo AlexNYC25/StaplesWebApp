@@ -1,0 +1,22 @@
+{
+  "name": "stapleswebapp",
+  "version": "1.0.0",
+  "description": "staples web app to search products",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexNYC25/StaplesWebApp.git"
+  },
+  "author": "Alexis Montes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexNYC25/StaplesWebApp/issues"
+  },
+  "homepage": "https://github.com/AlexNYC25/StaplesWebApp#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

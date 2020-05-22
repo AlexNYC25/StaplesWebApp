@@ -14,11 +14,13 @@ app.set('view engine', 'handlebars');
 
 
 app.get('/', (req, res) => {
+    // mockup will be index
     res.render('home');
 });
 
 app.get('/item', (req, res) =>{
     // add in render functionality for product items
+    // TODO: mockup will be 'product'
 })
 
 

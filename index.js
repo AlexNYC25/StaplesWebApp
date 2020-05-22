@@ -17,6 +17,10 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
+app.get('/item', (req, res) =>{
+    // add in render functionality for product items
+})
+
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!');

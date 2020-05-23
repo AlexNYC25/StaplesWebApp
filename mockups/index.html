@@ -9,23 +9,76 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     </head>
+    <style>
+        body{
+            background-color: #B9CDDA;
+        }
+
+        #carousel-Item {
+            width: 50px;
+            height: 40px;
+        }
+
+        #main-navbar {
+            background-color: #DF2935;
+        }
+
+        .main-button {
+            background-color: #61210F;
+            color: white
+        }
+
+        .carousel-pic{
+            width: 35px;
+            height: 500px;
+        }
+
+        .product-detail{
+            border-color: blue;
+            border-radius: 10px;
+            background-color: #aafafa;
+        }
+
+        .product-info{
+            background-color: #F6E8EA;
+
+        }
+    </style>
 
     <body>
-        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <div id="main-navbar" class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3  border-bottom shadow-sm">
             <h5 class="my-0 mr-md-auto font-weight-normal">Staples Web App</h5>
             <nav class="my-2 my-md-0 mr-md-3">
               <a class="p-2 text-dark" href="#">All Items</a>
               <a class="p-2 text-dark" href="#">Displays</a>
               <a class="p-2 text-dark" href="#">Github</a>
             </nav>
-            <a class="btn btn-outline-primary" href="#">Sign In</a>
+            <a class="btn main-button" href="#">Sign In</a>
         </div>
 
 
         <!-- Basic layout to copy for each item-->
-        <div class="album py-5 bg-light">
+        <div class="album py-5 ">
             <div class="container">
                 <div class="row">
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <!-- Actual img link to be placed in this img html tag-->
+                            <img class="bd-placeholder-img card-img-top" width="100%" height="225" aria-label="Placeholder: Thumbnail">
+                            </img>
+                                <div class="card-body">
+                                    <!-- Name of Product-->
+                                    <p class="card-text">Five Star 5 Subject Spiral Notebook</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <!--Link to product Page-->
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
                             <!-- Actual img link to be placed in this img html tag-->
@@ -46,6 +99,8 @@
                 </div>
                
             </div>
+
+            
         </div>
     </body>
 

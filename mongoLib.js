@@ -12,20 +12,35 @@ const client = new MongoClient(url, {
 });
 
 // basic template for querying database
-let x = 'Pine|PINE';
 const findDocuments = function(db, callback) {
     // gets the myTestCollection1
     const collection = db.collection('myNewCollection1');
     const temp = 'Pi'
     // find some documents
     // currently it queries all documents using {}
-    let x = { 'x': {$regex:'pi'}}
+    let y = 'pi'
+    let x = { 'x': {$regex:y}}
     collection.find(x, {collation: {locale: 'en', strength: 2}}).toArray( (err, docs) => {
         assert.equal(err, null);
         console.log('Found the following records');
         console.log(docs);
         callback(docs);
     });
+}
+
+const findProductsInDB = function(db, string, callback ) {
+    // set what collection to make queries at
+    const collection = db.collection('myNewCollection1');
+    
+    let queryString = { 'x': {$regex: string}};
+    
+    collection.find(queryString, {collation: {locale:'en', strength: 2}}).toArray( (err, docs) => {
+        assert.equal(err, null);
+        console.log('Found the following records');
+        console.log(docs);
+        callback(docs);
+    })
+
 }
 
 const formatInput = function(strInput){

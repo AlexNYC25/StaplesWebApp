@@ -1,14 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 
 import Navbar from './Navbar.js'
+import ProductLayout from './ProductLayout'
 
 function App() {
+  const searchVar = ''
   return (
     <div className="App">
       <Navbar />
-      <p>Hello World</p>
+      <ProductLayout search={searchVar} />
     </div>
   );
 }

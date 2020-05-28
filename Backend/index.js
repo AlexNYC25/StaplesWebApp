@@ -1,8 +1,31 @@
 //use express.js for web
 const express = require('express');
-const mongo_lib = require('./mongoLib.js')
+// My own mongoDb functions
+//const mongo_lib = require('./mongoLib.js')
+// added so api calls can be completed
+const cors = require('cors');
 
 let app = express();
+
+app.use(cors());
+
+
+app.get('/test/', (req, res) => {
+    // test json 
+    // should be replaced by actual mongodb search results
+    res.json(
+        [{
+            "_id": 1,
+            "index": 100,
+            "age": 100,
+            "eyeColor": "blue",
+            "name": "Doctor Who"
+        }]
+    )
+
+    console.log("call to test api was made")
+})
+
 
 
 /*
@@ -19,6 +42,8 @@ app.get('/', (req, res) => {
     TODO:
     get request where a string is passed from the front end to the back end
     and pass that string into external library module and generate data from it
+
+    May no longer be needed
 */
 app.get('/:str', (req, res) => {
     console.log(req.params.str);
@@ -36,6 +61,6 @@ app.get('/item/:id', (req, res) =>{
 })
 
 
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
+app.listen(8080, function () {
+    console.log('Example app listening on port 8080!');
 });

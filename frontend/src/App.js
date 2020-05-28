@@ -1,17 +1,17 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom'
 
 import './App.css';
 
-import Navbar from './Navbar.js'
 import ProductLayout from './ProductLayout'
+import HomePage from './HomePage'
 
 function App() {
-  const searchVar = ''
   return (
-    <div className="App">
-      <Navbar />
-      <ProductLayout search={searchVar} />
-    </div>
+    <Switch>
+      <Route exact path='/' component={HomePage} />
+      <Route path="/Product/:id" component={ProductLayout} />
+    </Switch>
   );
 }
 

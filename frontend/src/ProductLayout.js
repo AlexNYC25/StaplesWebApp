@@ -98,29 +98,29 @@ class ProductLayout extends React.Component{
  	async componentDidMount(){
 		const response = await fetch("http://localhost:8080/test/");
 		const data = await response.json();
-		this.setState({info: data})
+		//this.setState({info: data})
   	}
 
 
 	render() {
 
 	  return (
-			<div class="album py-5">
-				<p>{this.state.value}</p>
-				<label class="container">
-					<p>Enter Product Name</p>
-					<input class="form-control" type="text" placeholder="Search" aria-label="Search" value={this.state.value} onChange={this.handleChange}></input>
+			<div class="album py-5 text-center">
+				<p id="product-search-value">{this.state.value}</p>
+				<label class="container text-center">
+					
+					<input class="form-control" type="text" placeholder="Search Product Name" aria-label="Search" value={this.state.value} onChange={this.handleChange}></input>
 				</label>
-				<input type="submit" value="Submit" onClick={this.handleSubmit}></input>
-				<p> {this.searchValue}</p>
-				<div class="container">
+				<input id="search-submit-button" class="btn" type="submit" value="Submit" onClick={this.handleSubmit}></input>
+				<p></p>
+				<div class="container pt-4" id="product-container">
 					<div class="row">
 				  		{this.state.info.map(info => (
 							<div class="col-md-4">
 								<div class="card mb-4 shadow-sm">
 									<img class="bd-placeholder-img card-img-top" width="100%" height="225" aria-label="Placeholder: Thumbnail">
 									</img>
-									<div class="card-body"> 
+									<div class="card-body product-card"> 
 										<p class="card-text">{info.name}</p>
 										<div class="d-flex justify-content-between align-items-center">
 											<div class="btn-group">    

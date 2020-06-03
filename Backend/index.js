@@ -4,6 +4,7 @@ const express = require('express');
 //const mongo_lib = require('./mongoLib.js')
 // added so api calls can be completed
 const cors = require('cors');
+const mongo_lib = require('./mongoLib');
 
 let app = express();
 
@@ -47,7 +48,9 @@ app.get('/', (req, res) => {
 */
 app.get('/:str', (req, res) => {
     console.log(req.params.str);
-    res.send('searching for products using keyword ' + req.params.str);
+    
+    console.log(typeof(mongo_lib.handleUserSearch(req.params.str)));
+    //res.json(searchResults);
 })
 
 /*

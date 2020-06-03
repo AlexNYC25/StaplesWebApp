@@ -6,6 +6,8 @@ const url = 'mongodb://localhost:27017';
 // database name
 const dbName = 'staples';
 
+let finalResults = [];
+
 
 // create a client object
 const client = new MongoClient(url, {
@@ -72,19 +74,21 @@ const findStaplesProducts = (db, string, callback) => {
     let formattedString = formatInput(string);
 
     let queryString = { 'Name': {$regex: formattedString}};
+
+    let results;
     
     collection.find(queryString, {collation: {locale:'en', strength: 2}}).toArray( (err, docs) => {
-        assert.equal(err, null);
-        console.log('Found the following records');
-        console.log(docs);
-        results = docs;
+        //assert.equal(err, null);
+        //console.log('Found the following records');
+        
+        finalResults = docs;
         callback(docs);
-
-        return docs;
+        //console.log(results);
+        //return docs;
     })
 
 
-    //return results;
+    return results;
 
 }
 
@@ -93,14 +97,19 @@ const findStaplesProducts = (db, string, callback) => {
 */
 const handleUserSearch = (searchString) => {
 
+    let results = [];
+
     client.connect( (err) => {
-        assert.equal(null, err);
+        //assert.equal(null, err);
         const db = client.db(dbName);
 
-        return findStaplesProducts(db, searchString, () => {
+        results = findStaplesProducts(db, searchString, () => {
             client.close();
+            return results;
         });
     })
+
+    
 }
 
 
@@ -125,4 +134,8 @@ client.connect( (err)=> {
 */
 
 
+
 handleUserSearch("Accel")
+console.log(finalResults);
+
+//exports.handleUserSearch = handleUserSearch;

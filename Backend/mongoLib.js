@@ -1,38 +1,18 @@
 const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID;
 const assert = require('assert');
+
 
 // connection url
 const url = 'mongodb://localhost:27017';
 // database name
 const dbName = 'staples';
+// database options 
+const mongoOptions = {useNewUrlParser: true, useUnifiedTopology: true};
 
-let finalResults = [];
-
-
-// create a client object
-const client = new MongoClient(url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
-
-// basic template for querying database
-const findDocuments = function(db, callback) {
-    // gets the myTestCollection1
-    const collection = db.collection('myNewCollection1');
-    const temp = 'Pi'
-    // find some documents
-    // currently it queries all documents using {}
-    let y = 'pi'
-    let x = { 'x': {$regex:y}}
-    collection.find(x, {collation: {locale: 'en', strength: 2}}).toArray( (err, docs) => {
-        assert.equal(err, null);
-        console.log('Found the following records');
-        console.log(docs);
-        callback(docs);
-    });
-}
-
-
+const dbState = {
+    db: null
+};
 
 /*
     Description: Simple function where a sting is passed, where it is there broken into
@@ -50,10 +30,10 @@ const formatInput = function(strInput){
 
     for(let i = 0; i < searchKeywords.length; i++){
         if( i == (searchKeywords.length-1)){
-            formattedSearchString = formattedSearchString.concat(searchKeywords[i]);
+            formattedSearchString = formattedSearchString.concat('.',searchKeywords[i], '.');
         }
         else{
-            formattedSearchString = formattedSearchString.concat(searchKeywords[i], '|');
+            formattedSearchString = formattedSearchString.concat('.',searchKeywords[i],'.', '|');
         }
         
     }
@@ -61,81 +41,33 @@ const formatInput = function(strInput){
     return formattedSearchString;
 }
 
-
-/*
-    Description: function to take in db object and execute search string
-    Arguments: mongo db object, search string
-    Outputs: return formatted results
-*/
-const findStaplesProducts = (db, string, callback) => {
-    // set collection to be staplesProducts
-    const collection = db.collection('products');
-
-    let formattedString = formatInput(string);
-
-    let queryString = { 'Name': {$regex: formattedString}};
-
-    let results;
-    
-    collection.find(queryString, {collation: {locale:'en', strength: 2}}).toArray( (err, docs) => {
-        //assert.equal(err, null);
-        //console.log('Found the following records');
-        
-        finalResults = docs;
-        callback(docs);
-        //console.log(results);
-        //return docs;
-    })
-
-
-    return results;
-
-}
-
-/*
-    Description: This will be the main function that will be called to handle user input and return the json to be used in the state
-*/
-const handleUserSearch = (searchString) => {
-
-    let results = [];
-
-    client.connect( (err) => {
-        //assert.equal(null, err);
-        const db = client.db(dbName);
-
-        results = findStaplesProducts(db, searchString, () => {
-            client.close();
-            return results;
+const connect = (callback) => {
+    if(dbState.db){
+        callback();
+    }
+    else{
+        MongoClient.connect(url, mongoOptions, (err,client) => {
+            if(err){
+                callback(err);
+            }
+            else{
+                dbState.db = client.db(dbName);
+                callback();
+            }
         });
-    })
-
-    
+    }
 }
 
+const getPrimaryKey = (_id) => {
+    return ObjectID(_id);
+}
 
-/*
-// use connect method to conncect to the server
-client.connect( (err)=> {
-    assert.equal(null, err);
-    console.log('Connected successfully to server');
+const getDB = () => {
+    return dbState.db;
+}
 
-    const db = client.db(dbName);
-
-    
-    findDocuments(db, function() {
-        client.close();
-    });
-
-    
-
-
-    //client.close();
-})
-*/
+module.exports = {connect, getPrimaryKey, getDB, formatInput};
 
 
 
-handleUserSearch("Accel")
-console.log(finalResults);
 
-//exports.handleUserSearch = handleUserSearch;

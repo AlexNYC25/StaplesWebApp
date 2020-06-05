@@ -4,7 +4,7 @@ const express = require('express');
 //const mongo_lib = require('./mongoLib.js')
 // added so api calls can be completed
 const cors = require('cors');
-const mongo_lib = require('./mongoLib');
+const staplesDB = require('./mongoLib');
 
 let app = express();
 
@@ -14,6 +14,7 @@ app.use(cors());
 app.get('/test/', (req, res) => {
     // test json 
     // should be replaced by actual mongodb search results
+    /*
     res.json(
         [{
             "_id": 1,
@@ -23,6 +24,16 @@ app.get('/test/', (req, res) => {
             "name": "Doctor Who"
         }]
     )
+    */
+   staplesDB.getDB().collection('products').find({}).toArray((err, documents) => {
+       if(err){
+           console.log(err);
+       }
+       else {
+           console.log(documents);
+           res.json(documents);
+       }
+   })
 
     console.log("call to test api was made")
 })
@@ -47,9 +58,23 @@ app.get('/', (req, res) => {
     May no longer be needed
 */
 app.get('/:str', (req, res) => {
+    const string = req.params.str;
     console.log(req.params.str);
+    let queryString = { '$text': {'$search': string}};
+    let score = {score: {$meta: "textScore"}};
+
+    staplesDB.getDB().collection('products').find(queryString, score).project(score).sort(score).toArray( (err, documents) => {
+        console.log(queryString);
+        if(err) {
+            console.log(err);
+        }
+        else {
+            res.json(documents);
+        }
+    })
+
     
-    console.log(typeof(mongo_lib.handleUserSearch(req.params.str)));
+    //console.log(typeof(mongo_lib.handleUserSearch(req.params.str)));
     //res.json(searchResults);
 })
 
@@ -59,11 +84,34 @@ app.get('/:str', (req, res) => {
 */
 app.get('/item/:id', (req, res) =>{
     // TODO: set up backend response to return data for item number
+    let itemNumber = parseInt(req.params.id, 10);
     console.log(req.params.id);
-    res.send('searching for product with id ' + req.params.id);
+    let queryString = {'_id' : itemNumber};
+
+    staplesDB.getDB().collection('products').find(queryString).toArray( (err, documents) => {
+        console.log(queryString);
+        if(err){
+            console.log(err);
+        }
+        else {
+            res.json(documents);
+        }
+    })
+
+
+    //res.send('searching for product with id ' + req.params.id);
 })
 
 
-app.listen(8080, function () {
-    console.log('Example app listening on port 8080!');
-});
+staplesDB.connect((err) => {
+    if(err) {
+        console.log('Unable to connect to database');
+        process.exit(1);
+    }
+    else {
+        app.listen(8080, () => {
+            console.log('Connected to database, app listening on port 8080')
+        });
+    }
+})
+

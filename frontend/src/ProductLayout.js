@@ -60,7 +60,7 @@ class ProductLayout extends React.Component{
 
 	constructor(props){
 		super(props);
-		this.state = {value: '', info: originalInfo};
+		this.state = {value: '', info: []};
 		
 
 		this.handleChange = this.handleChange.bind(this);
@@ -86,7 +86,7 @@ class ProductLayout extends React.Component{
 		state's info is set to an empty array
 	*/
 	handleSubmit(event) {
-		alert('A name was submitted: ' + this.state.value);
+		//alert('A name was submitted: ' + this.state.value);
 		this.componentDidMount();
 		
   	}
@@ -96,9 +96,20 @@ class ProductLayout extends React.Component{
 		set the state info value as the new data
 	*/
  	async componentDidMount(){
-		const response = await fetch("http://localhost:8080/test/");
-		const data = await response.json();
-		//this.setState({info: data})
+		if(this.state.value == ''){
+			let link = "http://localhost:8080/test";
+			fetch(link)
+				.then(response => response.json())
+				.then(data => this.setState({info: data}))
+		}
+		else{
+			let link = "http://localhost:8080/"
+			link = link.concat(this.state.value)
+			console.log(link);
+			fetch(link)
+				.then(response => response.json())
+				.then(data => this.setState({info: data}))
+		}
   	}
 
 
@@ -106,7 +117,6 @@ class ProductLayout extends React.Component{
 
 	  return (
 			<div class="album py-5 text-center">
-				<p id="product-search-value">{this.state.value}</p>
 				<label class="container text-center">
 					
 					<input class="form-control" type="text" placeholder="Search Product Name" aria-label="Search" value={this.state.value} onChange={this.handleChange}></input>
@@ -121,10 +131,11 @@ class ProductLayout extends React.Component{
 									<img class="bd-placeholder-img card-img-top" width="100%" height="225" aria-label="Placeholder: Thumbnail">
 									</img>
 									<div class="card-body product-card"> 
-										<p class="card-text">{info.name}</p>
+										<p class="card-text">{info.Name}</p>
 										<div class="d-flex justify-content-between align-items-center">
 											<div class="btn-group">    
-												<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+												<button type="button" class="btn btn-sm btn-outline-secondary" > <a href={"/Product/".concat(info._id)}> View Product </a> </button>
+												
 											</div>
 										</div>
 									</div>

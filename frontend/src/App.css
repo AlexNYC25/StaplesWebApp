@@ -41,4 +41,34 @@
   }
 }
 
+#carousel-Item {
+  width: 50px;
+  height: 40px;
+}
+
+#main-navbar {
+  background-color: #DF2935;
+}
+
+.main-button {
+  background-color: #61210F;
+  color: white
+}
+
+.carousel-pic{
+  width: 35px;
+  height: 500px;
+}
+
+.product-detail{
+  border-color: blue;
+  border-radius: 10px;
+  background-color: #aafafa;
+}
+
+.product-info{
+  background-color: #F6E8EA;
+
+}
+
 

@@ -5,12 +5,13 @@ import './App.css';
 
 import ProductLayout from './ProductLayout'
 import HomePage from './HomePage'
+import ProductPage from './ProductPage'
 
 function App() {
   return (
     <Switch>
       <Route exact path='/' component={HomePage} />
-      <Route path="/Product/:id" component={ProductLayout} />
+      <Route path="/Product/:id" component={ProductPage} />
     </Switch>
   );
 }

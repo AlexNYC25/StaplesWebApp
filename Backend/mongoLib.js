@@ -25,20 +25,9 @@ const dbState = {
         It can find paper and mate but not papermate 
 */
 const formatInput = function(strInput){
-    let searchKeywords = strInput.split(' ');
-    let formattedSearchString = '';
-
-    for(let i = 0; i < searchKeywords.length; i++){
-        if( i == (searchKeywords.length-1)){
-            formattedSearchString = formattedSearchString.concat('.',searchKeywords[i], '.');
-        }
-        else{
-            formattedSearchString = formattedSearchString.concat('.',searchKeywords[i],'.', '|');
-        }
-        
-    }
+    //let formattedSearchString = "\"".concat(strInput, "\"")
     
-    return formattedSearchString;
+    return strInput;
 }
 
 const connect = (callback) => {

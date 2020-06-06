@@ -33,17 +33,19 @@ class ProductPage extends React.Component {
                     <div id="carousel-Item" class="col-lg-10 text-center align-self-center">
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
-                                <li data-target="#carouselExampleIndicators" data-slide-t0="0" class="active"> </li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="1"> </li>
-                                
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                             </ol>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img class="d-block w-100 carousel-pic" src="" alt=""></img>
+                                    <img class="d-block w-100 carousel-pic" src="http://4.bp.blogspot.com/-w8U75TCuhgU/Tzw8TmaclvI/AAAAAAAABJ0/6fMMcRLAceM/s1600/Rabbit3.jpg" alt="First slide" />
                                 </div>
-
-                                <div class="carousel-item ">
-
+                                <div class="carousel-item">
+                                    <img class="d-block w-100 carousel-pic" src="https://shop-resources.prod.cms.tractorsupply.com/resource/image/18248/portrait_ratio3x4/595/793/4c37b7f6d6f9d8a5b223334f1390191b/JJ/ten-reasons-not-to-buy-an-easter-bunny-main.jpg" alt="Second slide" />
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100 carousel-pic" src="https://storage.googleapis.com/scratchpay-com-assets/images/How%20Much%20Is%20a%20Pet%20Bunny/how_much_is_a_pet_bunny.jpg" alt="Third slide" />
                                 </div>
 
                             </div>
@@ -81,7 +83,11 @@ class ProductPage extends React.Component {
                     </div>
             
                 </div>
+                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+                
         </div>
+
+        
         )
         
     }

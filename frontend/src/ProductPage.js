@@ -3,6 +3,7 @@ import React from 'react'
 import './App.css'
 
 import Navbar from './Navbar'
+import ProductCarousel from './ProductCarousel'
 
 class ProductPage extends React.Component {
     constructor(props) {
@@ -10,6 +11,8 @@ class ProductPage extends React.Component {
         this.state = {id: this.props.match.params.id, productInfo: ''};
         this.componentDidMount();
     }
+
+
 
     async componentDidMount() {
         
@@ -29,39 +32,7 @@ class ProductPage extends React.Component {
             <div class="product-page">
                 <Navbar />
 
-                <div class="row justify-content-center">
-                    <div id="carousel-Item" class="col-lg-10 text-center align-self-center">
-                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img class="d-block w-100 carousel-pic" src="http://4.bp.blogspot.com/-w8U75TCuhgU/Tzw8TmaclvI/AAAAAAAABJ0/6fMMcRLAceM/s1600/Rabbit3.jpg" alt="First slide" />
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100 carousel-pic" src="https://shop-resources.prod.cms.tractorsupply.com/resource/image/18248/portrait_ratio3x4/595/793/4c37b7f6d6f9d8a5b223334f1390191b/JJ/ten-reasons-not-to-buy-an-easter-bunny-main.jpg" alt="Second slide" />
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100 carousel-pic" src="https://storage.googleapis.com/scratchpay-com-assets/images/How%20Much%20Is%20a%20Pet%20Bunny/how_much_is_a_pet_bunny.jpg" alt="Third slide" />
-                                </div>
-
-                            </div>
-                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="false"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="false"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-
-                        </div>
-                    </div>
-
-                </div>
+                <ProductCarousel ProductID = {this.state.id} />
 
 
                 <div id="" class="container product-info rounded-lg my-2">

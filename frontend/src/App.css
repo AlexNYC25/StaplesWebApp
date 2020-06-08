@@ -72,3 +72,23 @@
 }
 
 
+
+.data-btn{
+  background-color: #64A6BD !important;
+  
+}
+
+.data-btn-section{
+  background-color: #086788;
+  padding: 1.5%;
+  width: 90%;
+}
+
+.btn-row {
+  margin: 0 !important;
+  margin-top: 3% !important;
+  margin-bottom: 3% !important;
+}
+
+
+

@@ -29,7 +29,7 @@ class DataManipulation extends React.Component {
                         <Button href="/NewProduct" className="data-btn col col-4 ml-autp">
                             Add New Products
                         </Button>
-                        <Button href="#" className="data-btn col col-3 ml-auto">
+                        <Button href="/NewProductName" className="data-btn col col-3 ml-auto">
                             Change Product Name
                         </Button>
                         <Button href="#" className="data-btn col col-4 ml-auto">

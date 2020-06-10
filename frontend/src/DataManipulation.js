@@ -37,7 +37,7 @@ class DataManipulation extends React.Component {
                         </Button>
                     </div>
                     <div className="row btn-row justify-content-center">
-                        <Button href="#" className="data-btn col col-4 mr-auto">
+                        <Button href="/AddProductLocation" className="data-btn col col-4 mr-auto">
                             Add Location to Products
                         </Button>
                         <Button href="#" className="data-btn col col-4 ml-auto">

@@ -3,11 +3,11 @@ import { Route, Switch } from 'react-router-dom'
 
 import './App.css';
 
-import ProductLayout from './ProductLayout'
 import HomePage from './HomePage'
 import ProductPage from './ProductPage'
 import DataManipulation from './DataManipulation'
 import NewProduct from './NewProduct'
+import NewProductName from './NewProductName'
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
       <Route path="/Product/:id" component={ProductPage} />
       <Route path="/DataManipulation" component={DataManipulation} />
       <Route path="/NewProduct" component={NewProduct} />
+      <Route path="/NewProductName" component={NewProductName} />
     </Switch>
   );
 }

@@ -48,9 +48,14 @@ class ProductPage extends React.Component {
                     <div>
                         <p>Locations</p>
                         <ul>
-                            <li>Location 1</li>
-                            <li>Location 2</li>
+                            {this.state.productInfo.locations != null
+                            ? this.state.productInfo.locations.map((value, index) => {
+                                return <li key={index}>{value}</li>
+                            })
+                            : <li>There are no locations</li>
+                            }
                         </ul>
+
                     </div>
             
                 </div>

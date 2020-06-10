@@ -132,6 +132,28 @@ app.post('/products/add', (req, res) => {
 
 })
 
+app.post('/products/rename', (req, res) => {
+    let id = parseInt(req.body.id);
+    let name = req.body.name;
+
+    staplesDB.getDB().collection('products').updateOne({ _id: id}, { $set: {Name: name }}, (err, documents) => {
+        // basic error handling for error in database
+        if(err){
+            res.json({message: 'Error occured when trying to change product Name'})
+            return;
+        }
+
+        // error message handling for different specific errors
+        if(documents.matchedCount === 0){
+            res.json({message: 'No Product was found with the entered id'})
+        }
+
+        if(documents.modifiedCount === 1){
+            res.json({message: 'Product Name was modified Sucessfully'})
+        }
+
+    })
+})
 
 staplesDB.connect((err) => {
     if(err) {

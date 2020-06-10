@@ -8,6 +8,7 @@ import ProductPage from './ProductPage'
 import DataManipulation from './DataManipulation'
 import NewProduct from './NewProduct'
 import NewProductName from './NewProductName'
+import AddProductLocation from './NewProductLocation'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/DataManipulation" component={DataManipulation} />
       <Route path="/NewProduct" component={NewProduct} />
       <Route path="/NewProductName" component={NewProductName} />
+      <Route path='/AddProductLocation' component={AddProductLocation} />
     </Switch>
   );
 }

@@ -5,10 +5,16 @@ const express = require('express');
 // added so api calls can be completed
 const cors = require('cors');
 const staplesDB = require('./mongoLib');
+const bodyParser = require('body-parser')
+
+
 
 let app = express();
 
 app.use(cors());
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 
 app.get('/test/', (req, res) => {
@@ -100,6 +106,30 @@ app.get('/item/:id', (req, res) =>{
 
 
     //res.send('searching for product with id ' + req.params.id);
+})
+
+app.post('/products/add', (req, res) => {
+    // need to parse string to int to maintain uniformity and to not have duplicates
+    let id = parseInt(req.body.id);
+    let name = req.body.name;
+
+    staplesDB.getDB().collection('products').insertOne({_id: id, Name: name}, (err, documents) => {
+        
+        //error handling with error messages returned to the page
+        if(err){
+            if(err.code == 11000){
+                res.json({message: 'There already exists a product with that SKU'})
+            }
+
+            res.json({message: 'There was some sort of Error adding product to database'})
+        }
+
+        if(documents.insertedId == id){
+            res.json({message: 'Product was added to database successfully'})
+        }
+        
+    })
+
 })
 
 

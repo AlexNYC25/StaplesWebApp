@@ -4,6 +4,10 @@ import Button from '@material-ui/core/Button';
 
 import Navbar from './Navbar'
 
+/*
+    Connect to actual api for submit behavior
+*/
+
 class NewProduct extends React.Component {
     constructor(props){
         super(props);
@@ -14,7 +18,7 @@ class NewProduct extends React.Component {
     }
 
     handleChange(event){
-        if(event.target.name == 'id-number'){
+        if(event.target.name == 'product-id'){
             this.setState({
                 new_id :event.target.value
             })
@@ -29,20 +33,43 @@ class NewProduct extends React.Component {
 
     handleSubmit(event){
         // from here we submit to the api and get a status message back
-        alert('Attempting to input product '.concat(this.state.new_id, ' with name ', this.state.new_name))
+
+        // check if there is data in the field values
+        if(this.state.new_id === null || this.state.new_id === '' || this.state.new_name === null || this.state.new_name === ''){
+            this.setState({message: "Error: One or more pieces of data are not filled in"})
+            return;
+        }
+
+        // prevents page from reloading allowing a message to be displayed from backend
+        event.preventDefault();
+
+        // Post data object
+        let requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({id: this.state.new_id, name: this.state.new_name})
+        };
+
+        // reset form values
+        this.setState({new_id: '', new_name: ''})
+
+        fetch('http://localhost:8080/products/add', requestOptions)
+            .then(response => response.json())
+            .then(data => this.setState({message: data.message}))
+        
     }
 
     render(){
         return (
-            <div className="">
+            <div className="new-data">
                 <Navbar />
                 
                 <form className="data-options container">
-                    <h2>Add a new Product</h2>
+                    <h2>Add a New Product</h2>
                     <div className="row">
                         <TextField
                             required
-                            name="id-number"
+                            name="product-id"
                             label="Product ID"
                             type="number"
                             variant="outlined"
@@ -63,6 +90,7 @@ class NewProduct extends React.Component {
 
                         />
                     </div>
+                    <div className='row'>
                     <Button
                         variant="contained"
                         color="primary"
@@ -75,8 +103,9 @@ class NewProduct extends React.Component {
                     >
                         Submit Product
                     </Button>
+                    </div>
                 
-                    <p id="status-message">
+                    <p className='h3' id="status-message">
                         {this.state.message}
                     </p>
                 </form>

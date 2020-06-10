@@ -139,7 +139,7 @@ app.post('/products/rename', (req, res) => {
     staplesDB.getDB().collection('products').updateOne({ _id: id}, { $set: {Name: name }}, (err, documents) => {
         // basic error handling for error in database
         if(err){
-            res.json({message: 'Error occured when trying to change product Name'})
+            res.json({message: 'Error occurred when trying to change product Name'})
             return;
         }
 
@@ -152,6 +152,31 @@ app.post('/products/rename', (req, res) => {
             res.json({message: 'Product Name was modified Sucessfully'})
         }
 
+    })
+})
+
+app.post('/products/locations', (req, res) => {
+    console.log("request for adding location has been recieved")
+
+    let id = parseInt(req.body.id)
+    let location = req.body.location
+
+    staplesDB.getDB().collection('products').updateOne({_id: id}, {$push: {locations: location}}, (err, documents) => {
+        //
+        if(err){
+            res.json({message: 'Error occurred when adding location to product.'})
+        }
+
+        //console.log(documents);
+
+        //
+        if(documents.matchedCount === 0){
+            res.json({message: 'No Product was found with the entered id.'})
+        }
+
+        if(documents.modifiedCount === 1){
+            res.json({message: 'Location was added to the product info.'})
+        }
     })
 })
 

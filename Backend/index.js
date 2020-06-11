@@ -5,6 +5,7 @@ const express = require('express');
 // added so api calls can be completed
 const cors = require('cors');
 const staplesDB = require('./mongoLib');
+const staplesImages = require('./imageLib')
 const bodyParser = require('body-parser')
 
 
@@ -15,6 +16,8 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use('/public', express.static('public'))
 
 
 app.get('/test/', (req, res) => {
@@ -36,6 +39,7 @@ app.get('/test/', (req, res) => {
            console.log(err);
        }
        else {
+           
            console.log(documents);
            res.json(documents);
        }
@@ -100,6 +104,7 @@ app.get('/item/:id', (req, res) =>{
             console.log(err);
         }
         else {
+            
             res.json(documents);
         }
     })
@@ -156,7 +161,7 @@ app.post('/products/rename', (req, res) => {
 })
 
 app.post('/products/locations', (req, res) => {
-    console.log("request for adding location has been recieved")
+    //console.log("request for adding location has been recieved")
 
     let id = parseInt(req.body.id)
     let location = req.body.location
@@ -176,6 +181,25 @@ app.post('/products/locations', (req, res) => {
 
         if(documents.modifiedCount === 1){
             res.json({message: 'Location was added to the product info.'})
+        }
+    })
+})
+
+app.post('/products/price', (req, res) => {
+    let id =  parseInt(req.body.id)
+    let price = parseInt(req.body.price)
+
+    staplesDB.getDB().collection('products').updateOne({_id: id}, {$set: {price: price}}, (err, documents) => {
+        if(err){
+            res.json({message: 'Error occurred when adding price to product.'})
+        }
+
+        if(documents.matchedCount === 0){
+            res.json({message: 'No Product was found with the entered id.'})
+        }
+
+        if(documents.modifiedCount === 1){
+            res.json({message: 'New Price was added to the product info.'})
         }
     })
 })

@@ -43,6 +43,15 @@ class ProductPage extends React.Component {
                         <div class="col-lg-5">
                             <p>Product SKU: {this.state.productInfo._id}</p>
                         </div>
+                        <div className='col-lg-2'>
+                            <p>
+                                Product Price: 
+                                {this.state.productInfo.price != null
+                                ? '$'.concat(this.state.productInfo.price)
+                                : ' No price Available right now' 
+                                }
+                            </p>
+                        </div>
                     </div>
 
                     <div>

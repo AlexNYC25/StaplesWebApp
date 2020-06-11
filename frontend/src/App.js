@@ -9,6 +9,7 @@ import DataManipulation from './DataManipulation'
 import NewProduct from './NewProduct'
 import NewProductName from './NewProductName'
 import AddProductLocation from './NewProductLocation'
+import AddProductPrice from './NewProductPrice'
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
       <Route path="/NewProduct" component={NewProduct} />
       <Route path="/NewProductName" component={NewProductName} />
       <Route path='/AddProductLocation' component={AddProductLocation} />
+      <Route path='/AddProductPrice' component={AddProductPrice} />
+
     </Switch>
   );
 }

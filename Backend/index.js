@@ -5,8 +5,8 @@ const express = require('express');
 // added so api calls can be completed
 const cors = require('cors');
 const staplesDB = require('./mongoLib');
-const staplesImages = require('./imageLib')
 const bodyParser = require('body-parser')
+require('dotenv').config()
 
 
 
@@ -93,7 +93,7 @@ app.get('/:str', (req, res) => {
     get request for item using passed id and return data on that product
 */
 app.get('/item/:id', (req, res) =>{
-    // TODO: set up backend response to return data for item number
+    
     let itemNumber = parseInt(req.params.id, 10);
     console.log(req.params.id);
     let queryString = {'_id' : itemNumber};
@@ -202,6 +202,12 @@ app.post('/products/price', (req, res) => {
             res.json({message: 'New Price was added to the product info.'})
         }
     })
+})
+
+app.post('/products/images', (req, res) => {
+
+    
+
 })
 
 staplesDB.connect((err) => {

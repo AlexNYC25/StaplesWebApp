@@ -23,17 +23,7 @@ app.use('/public', express.static('public'))
 app.get('/test/', (req, res) => {
     // test json 
     // should be replaced by actual mongodb search results
-    /*
-    res.json(
-        [{
-            "_id": 1,
-            "index": 100,
-            "age": 100,
-            "eyeColor": "blue",
-            "name": "Doctor Who"
-        }]
-    )
-    */
+    
    staplesDB.getDB().collection('products').find({}).toArray((err, documents) => {
        if(err){
            console.log(err);

@@ -10,6 +10,7 @@ import NewProduct from './NewProduct'
 import NewProductName from './NewProductName'
 import AddProductLocation from './NewProductLocation'
 import AddProductPrice from './NewProductPrice'
+import AddProductImage from './NewProductImage'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path="/NewProductName" component={NewProductName} />
       <Route path='/AddProductLocation' component={AddProductLocation} />
       <Route path='/AddProductPrice' component={AddProductPrice} />
+      <Route path='/AddProductImage' component={AddProductImage} />
 
     </Switch>
   );

@@ -6,6 +6,8 @@ const express = require('express');
 const cors = require('cors');
 const staplesDB = require('./mongoLib');
 const bodyParser = require('body-parser')
+
+
 require('dotenv').config()
 
 
@@ -15,40 +17,24 @@ let app = express();
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.json());console.log(documents);
 
 app.use('/public', express.static('public'))
 
 
 app.get('/test/', (req, res) => {
-    // test json 
-    // should be replaced by actual mongodb search results
     
    staplesDB.getDB().collection('products').find({}).toArray((err, documents) => {
        if(err){
            console.log(err);
        }
        else {
-           
-           console.log(documents);
            res.json(documents);
        }
    })
 
-    console.log("call to test api was made")
 })
 
-
-
-/*
-    TODO:
-    Main api get request for the home page
-    Should return all products from mongodb database when called by the front end
-*/
-app.get('/', (req, res) => {
-    // mockup will be index
-    res.send('Hello World');
-});
 
 /*
     TODO:
@@ -59,48 +45,40 @@ app.get('/', (req, res) => {
 */
 app.get('/:str', (req, res) => {
     const string = req.params.str;
-    console.log(req.params.str);
+    
     let queryString = { '$text': {'$search': string}};
     let score = {score: {$meta: "textScore"}};
 
     staplesDB.getDB().collection('products').find(queryString, score).project(score).sort(score).toArray( (err, documents) => {
-        console.log(queryString);
+        
         if(err) {
             console.log(err);
         }
         else {
             res.json(documents);
         }
-    })
+    });
 
-    
-    //console.log(typeof(mongo_lib.handleUserSearch(req.params.str)));
-    //res.json(searchResults);
 })
 
 /*
-    TODO:
-    get request for item using passed id and return data on that product
+
 */
 app.get('/item/:id', (req, res) =>{
     
-    let itemNumber = parseInt(req.params.id, 10);
-    console.log(req.params.id);
+    const itemNumber = parseInt(req.params.id);
+    
     let queryString = {'_id' : itemNumber};
 
     staplesDB.getDB().collection('products').find(queryString).toArray( (err, documents) => {
-        console.log(queryString);
+        
         if(err){
             console.log(err);
         }
-        else {
-            
+        else { 
             res.json(documents);
         }
-    })
-
-
-    //res.send('searching for product with id ' + req.params.id);
+    });
 })
 
 app.post('/products/add', (req, res) => {

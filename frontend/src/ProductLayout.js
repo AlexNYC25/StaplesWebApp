@@ -94,10 +94,13 @@ class ProductLayout extends React.Component{
 	/*
 		Fetches backend response at certain path and using return data 
 		set the state info value as the new data
+
+		TODO:
+	  		Test if component will still render content using the same get path '/id'
 	*/
  	async componentDidMount(){
 		if(this.state.value == ''){
-			let link = "http://localhost:8080/test";
+			let link = "http://localhost:8080/";
 			fetch(link)
 				.then(response => response.json())
 				.then(data => this.setState({info: data}))

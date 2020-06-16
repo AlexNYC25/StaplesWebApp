@@ -6,6 +6,9 @@ const express = require('express');
 const cors = require('cors');
 const staplesDB = require('./mongoLib');
 const bodyParser = require('body-parser')
+const multer = require('multer')
+
+let upload = multer();
 
 
 require('dotenv').config()
@@ -17,12 +20,12 @@ let app = express();
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());console.log(documents);
+app.use(bodyParser.json());
 
 app.use('/public', express.static('public'))
 
 
-app.get('/test/', (req, res) => {
+app.get('/allProducts', (req, res) => {
     
    staplesDB.getDB().collection('products').find({}).toArray((err, documents) => {
        if(err){
@@ -45,9 +48,11 @@ app.get('/test/', (req, res) => {
 */
 app.get('/:str', (req, res) => {
     const string = req.params.str;
+
     
     let queryString = { '$text': {'$search': string}};
     let score = {score: {$meta: "textScore"}};
+
 
     staplesDB.getDB().collection('products').find(queryString, score).project(score).sort(score).toArray( (err, documents) => {
         
@@ -172,9 +177,13 @@ app.post('/products/price', (req, res) => {
     })
 })
 
-app.post('/products/images', (req, res) => {
+app.post('/products/images', upload.single('productImage') , (req, res) => {
 
-    
+    const productImage = req.file;
+
+    //console.log(req.file)
+
+    res.json({message: `file ${req.file.originalname} was recieved`})
 
 })
 

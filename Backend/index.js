@@ -7,6 +7,9 @@ const cors = require('cors');
 const staplesDB = require('./mongoLib');
 const bodyParser = require('body-parser')
 const multer = require('multer')
+var ImageKit = require('imagekit')
+// set up error handling for if json is not here
+const loginInfo = require('./userLogin.json');
 
 let upload = multer();
 
@@ -177,13 +180,58 @@ app.post('/products/price', (req, res) => {
     })
 })
 
+/*
+
+    TODO: Clearn up image handling now that base64 string is passed instead
+
+*/
 app.post('/products/images', upload.single('productImage') , (req, res) => {
 
-    const productImage = req.file;
+    const imageKit = new ImageKit({
+        publicKey: loginInfo.publicKey,
+        privateKey: loginInfo.privateKey,
+        urlEndpoint: loginInfo.UrlEndpoint
+    });
 
-    //console.log(req.file)
+    const productBASE64 = req.body.base64String;
+    const name = req.body.fileName;
+    const id = parseInt(req.body.new_id)
 
-    res.json({message: `file ${req.file.originalname} was recieved`})
+    imageKit.upload({
+        file: productBASE64,
+        fileName: name
+    }, function(error, result) {
+        if(error){
+            console.log(error)
+            res.json({message: 'error uploading image'})
+        }
+        else{
+            console.log(result)
+
+            let imageUrl = result.url
+            let thumbnailUrl = result.thumbnailUrl
+
+            staplesDB.getDB().collection('products').updateOne({_id:id}, {$push: {images: [{image:imageUrl, thumbnail:thumbnailUrl}]}}, (err, documents) => {
+
+                if(err){
+                    res.json({message: 'error occured when uploading info to database'})
+                }
+
+                if(documents.matchedCount === 0){
+                    res.json({message: 'No Product was found with the entered id.'})
+                }
+        
+                if(documents.modifiedCount === 1){
+                    res.json({message: 'New Image was added to the product info.'})
+                }
+
+            })
+        }
+    })
+
+
+    //res.json({message: `file ${req.file.originalname} was recieved`})
+
 
 })
 

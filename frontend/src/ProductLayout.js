@@ -64,7 +64,14 @@ class ProductLayout extends React.Component{
 				  		{this.state.info.map(info => (
 							<div class="col-md-4">
 								<div class="card mb-4 shadow-sm">
-									<img class="bd-placeholder-img card-img-top" width="100%" height="225" aria-label="Placeholder: Thumbnail">
+									<img class=" card-img-top" width="100%" height="225" aria-label="Placeholder: Thumbnail"
+										src=
+										{
+											info.images != null
+											? info.images[0][0].thumbnail
+											: ''
+										}
+									>
 									</img>
 									<div class="card-body product-card"> 
 										<p class="card-text">{info.Name}</p>

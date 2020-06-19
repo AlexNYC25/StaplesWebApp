@@ -21,7 +21,7 @@ class ProductPage extends React.Component {
 
             fetch(link)
                 .then(response => response.json())
-                .then(data => this.setState({productInfo: data[0]}))
+                .then(data => this.setState({productInfo: data[0], productImages:data[0].images}))
                 
 
             // set up image data handling later
@@ -33,7 +33,7 @@ class ProductPage extends React.Component {
             <div class="product-page">
                 <Navbar />
 
-                <ProductCarousel ProductID = {this.state.id} />
+                <ProductCarousel ProductID = {this.state.id} Images={this.state.productImages}/>
 
 
                 <div id="" class="container product-info rounded-lg my-2">

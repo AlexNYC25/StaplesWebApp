@@ -8,7 +8,7 @@ import ProductCarousel from './ProductCarousel'
 class ProductPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {id: this.props.match.params.id, productInfo: ''};
+        this.state = {id: this.props.match.params.id, productInfo: '', productImages:[]};
         this.componentDidMount();
     }
 
@@ -22,8 +22,9 @@ class ProductPage extends React.Component {
             fetch(link)
                 .then(response => response.json())
                 .then(data => this.setState({productInfo: data[0]}))
-        
-        console.log(this.state.productData)
+                
+
+            // set up image data handling later
     
     }
 

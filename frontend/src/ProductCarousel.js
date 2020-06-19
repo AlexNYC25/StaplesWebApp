@@ -13,56 +13,55 @@ import './App.css'
 class ProductCarousel extends React.Component{
     constructor(props) {
         super(props);
+
         this.state = {
             id: this.props.ProductID,
             value: 0,
-            slides: [
-                (<img width="300px" src="http://4.bp.blogspot.com/-w8U75TCuhgU/Tzw8TmaclvI/AAAAAAAABJ0/6fMMcRLAceM/s1600/Rabbit3.jpg" />),
-                (<img width="300px"  src="https://shop-resources.prod.cms.tractorsupply.com/resource/image/18248/portrait_ratio3x4/595/793/4c37b7f6d6f9d8a5b223334f1390191b/JJ/ten-reasons-not-to-buy-an-easter-bunny-main.jpg" />),
-                ( <img width="300px"  src="https://storage.googleapis.com/scratchpay-com-assets/images/How%20Much%20Is%20a%20Pet%20Bunny/how_much_is_a_pet_bunny.jpg" />)
-            ],
         }
+
         this.onchange = this.onchange.bind(this);
 
     }
 
     onchange(value){
-        //console.log(value)
         // restarts dots position
-        if(value >= 3){
+        if(this.props.Images){
+            if(value >= this.props.Images.length){
+                value = 0
+            }
+        }
+        else{
             value = 0
         }
+        
 
         this.setState({value})
     }
 
-    async componentDidMount(){
 
-    }
 
     render() {
         return (
             <div>
                 <Carousel
                     value={this.state.value}
-                    slides={this.state.slides}
                     onChange={this.onchange}
                     autoPlay={2000}
-                    animationSpeed={1000}
+                    animationSpeed={2000}
                     arrows
                     infinite
                 >
+                    
                 
+                    {
+                        this.props.Images
+                            ?this.props.Images.map(img => <img width="300px" height="150px" src={img}></img>)
+                            : <img  src='https://media.giphy.com/media/hEc4k5pN17GZq/giphy.gif' />
+                    }
                 
         
                 </Carousel>
-                <Dots
-                    index={this.state.value}
-                    count={3}
-                    onDotClick={(index) => this.setState({index})}
-                >
-
-                </Dots>
+                
             </div>
         )
     }

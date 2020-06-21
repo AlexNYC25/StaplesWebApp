@@ -187,16 +187,19 @@ app.post('/products/price', (req, res) => {
 */
 app.post('/products/images', upload.single('productImage') , (req, res) => {
 
+    // setting up credentials for imagekit object
     const imageKit = new ImageKit({
         publicKey: loginInfo.publicKey,
         privateKey: loginInfo.privateKey,
         urlEndpoint: loginInfo.UrlEndpoint
     });
 
+    // variables passed from request for database handling
     const productBASE64 = req.body.base64String;
     const name = req.body.fileName;
     const id = parseInt(req.body.new_id)
 
+    // actual upload method
     imageKit.upload({
         file: productBASE64,
         fileName: name
@@ -211,7 +214,7 @@ app.post('/products/images', upload.single('productImage') , (req, res) => {
             let imageUrl = result.url
             let thumbnailUrl = result.thumbnailUrl
 
-            staplesDB.getDB().collection('products').updateOne({_id:id}, {$push: {images: [{image:imageUrl, thumbnail:thumbnailUrl}]}}, (err, documents) => {
+            staplesDB.getDB().collection('products').updateOne({_id:id}, {$push: {images: imageUrl , thumbnails:thumbnailUrl}}, (err, documents) => {
 
                 if(err){
                     res.json({message: 'error occured when uploading info to database'})

@@ -3,16 +3,6 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-import Navbar from './Navbar'
-
-/*
-    set up api handling method
-
-    first one to test out
-
-    
-*/
-
 class NewProductName extends React.Component {
     constructor(props){
         super(props)
@@ -24,12 +14,12 @@ class NewProductName extends React.Component {
 
     handleChange(event){
 
-        if(event.target.name == 'product-id'){
+        if(event.target.name === 'product-id'){
             this.setState({
                 new_id: event.target.value
             })
         }
-        if(event.target.name == 'product-name'){
+        if(event.target.name === 'product-name'){
             this.setState({
                 new_name: event.target.value
             })
@@ -68,7 +58,6 @@ class NewProductName extends React.Component {
     render() {
         return (
             <div className="new-data">
-                <Navbar />
 
                 <form className="data-options container">
                     <h2>Change a product Name</h2>

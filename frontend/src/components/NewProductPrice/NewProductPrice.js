@@ -3,8 +3,6 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-import Navbar from './Navbar'
-
 class NewProductPrice extends React.Component {
     constructor(props){
         super(props)
@@ -15,13 +13,13 @@ class NewProductPrice extends React.Component {
     }
 
     handleChange(event){
-        if(event.target.name == 'product-id'){
+        if(event.target.name === 'product-id'){
             this.setState({
                 new_id: event.target.value
             })
         }
 
-        if(event.target.name == 'product-price'){
+        if(event.target.name === 'product-price'){
             this.setState({
                 new_price: event.target.value
             })
@@ -53,8 +51,6 @@ class NewProductPrice extends React.Component {
     render(){
         return (
             <div className='new-data'>
-                <Navbar />
-
                 <p className='h2'>
                     Add or Change Price of Product
                 </p>

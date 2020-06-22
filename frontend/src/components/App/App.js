@@ -1,16 +1,17 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom'
 
-import './App.css';
+// css for main app
+import '../../App.css';
 
-import HomePage from './HomePage'
-import ProductPage from './ProductPage'
-import DataManipulation from './DataManipulation'
-import NewProduct from './NewProduct'
-import NewProductName from './NewProductName'
-import AddProductLocation from './NewProductLocation'
-import AddProductPrice from './NewProductPrice'
-import AddProductImage from './NewProductImage'
+import HomePage from '../HomePage/HomePage'
+import ProductPage from '../ProductPage/ProductPage'
+import DataManipulation from '../DataManipulation/DataManipulation'
+import NewProduct from '../NewProduct/NewProduct'
+import NewProductName from '../NewProductName/NewProductName'
+import AddProductLocation from '../NewProductLocation/NewProductLocation'
+import AddProductPrice from '../NewProductPrice/NewProductPrice'
+import AddProductImage from '../NewProductImage/NewProductImage'
 
 function App() {
   return (

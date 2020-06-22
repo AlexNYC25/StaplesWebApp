@@ -1,9 +1,8 @@
 import React from 'react'
 
-import './App.css'
+import ProductCarousel from '../ProductCarousel/ProductCarousel'
 
-import Navbar from './Navbar'
-import ProductCarousel from './ProductCarousel'
+//import './App.css'
 
 class ProductPage extends React.Component {
     constructor(props) {
@@ -15,26 +14,19 @@ class ProductPage extends React.Component {
 
 
     async componentDidMount() {
-        
             let link = "http://localhost:8080/item/"
             link = link.concat(this.state.id);
 
             fetch(link)
                 .then(response => response.json())
                 .then(data => this.setState({productInfo: data[0], productImages:data[0].images}))
-                
 
-            // set up image data handling later
-    
     }
 
     render() {
         return (
             <div class="product-page">
-                <Navbar />
-
                 <ProductCarousel ProductID = {this.state.id} Images={this.state.productImages}/>
-
 
                 <div id="" class="container product-info rounded-lg my-2">
                     <div class="row">

@@ -1,11 +1,8 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import IconButton from '@material-ui/core/IconButton'
 import Input from '@material-ui/core/Input'
 
-import Navbar from './Navbar'
-import { formatMs } from '@material-ui/core'
 
 class NewProductImage extends React.Component {
     constructor(props){
@@ -18,13 +15,11 @@ class NewProductImage extends React.Component {
     }
 
     handleChange(event){
-
-        if(event.target.name == 'product-id'){
+        if(event.target.name === 'product-id'){
             this.setState({
-                new_id : event.target.value
+                new_id: event.target.value
             })
         }
-
     }
 
     handleImageUpload(event){
@@ -38,7 +33,6 @@ class NewProductImage extends React.Component {
                 fileName: file.name
             })
         }
-
     }
 
     handleSubmit(event){
@@ -66,16 +60,11 @@ class NewProductImage extends React.Component {
         }
 
         this.setState({ new_id:null, img_data:null, base64:null, originalName: null})
-
-        
-
     }
 
     render(){
         return (
             <div className='new-data'>
-                <Navbar />
-
                 <form  className='data-options container' enctype="multipart/form-data">
                     <h2>Add an image to a product</h2>
                     <div className='row'>
@@ -90,7 +79,6 @@ class NewProductImage extends React.Component {
                             value={this.state.new_id}
                             onChange={this.handleChange}
                         />
-
                             <Input
                                 required
                                 name='productImage'
@@ -103,8 +91,6 @@ class NewProductImage extends React.Component {
                                 //value={this.state.img_data}
                                 onChange={this.handleImageUpload}
                             />
-
-                        
                         <Button
                             variant='contained'
                             color='primary'
@@ -118,12 +104,7 @@ class NewProductImage extends React.Component {
                         >
                             Submit Location
                         </Button>
-
-
-
                     </div>
-                    <p>
-                    </p>
 
                 </form>
 

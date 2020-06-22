@@ -2,11 +2,6 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-import Navbar from './Navbar'
-
-/*
-    Connect to actual api for submit behavior
-*/
 
 class NewProduct extends React.Component {
     constructor(props){
@@ -18,12 +13,12 @@ class NewProduct extends React.Component {
     }
 
     handleChange(event){
-        if(event.target.name == 'product-id'){
+        if(event.target.name === 'product-id'){
             this.setState({
-                new_id :event.target.value
+                new_id: event.target.value
             })
         }
-        if(event.target.name == 'product-name'){
+        if(event.target.name === 'product-name'){
             this.setState({
                 new_name: event.target.value
             })
@@ -62,8 +57,6 @@ class NewProduct extends React.Component {
     render(){
         return (
             <div className="new-data">
-                <Navbar />
-                
                 <form className="data-options container">
                     <h2>Add a New Product</h2>
                     <div className="row">

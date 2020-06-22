@@ -2,11 +2,6 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
-import Navbar from './Navbar'
-/*
-    set up return elements 
-    and handle methods
-*/
 
 class NewProductLocation extends React.Component {
     constructor(props){
@@ -21,13 +16,13 @@ class NewProductLocation extends React.Component {
 
     handleChange(event){
 
-        if(event.target.name == 'product-id'){
+        if(event.target.name === 'product-id'){
             this.setState({
                 new_id : event.target.value
             })
         }
 
-        if(event.target.name == 'product-location'){
+        if(event.target.name === 'product-location'){
             this.setState({
                 new_location: event.target.value
             })
@@ -37,6 +32,7 @@ class NewProductLocation extends React.Component {
 
     handleSubmit(event){
 
+        // resets message
         this.setState({message: ''})
 
         if(this.state.new_id === null || this.state.new_id === '' || this.state.new_location === null || this.state.new_location === ''){
@@ -51,6 +47,7 @@ class NewProductLocation extends React.Component {
             body: JSON.stringify({id: this.state.new_id, location:this.state.new_location})
         }
 
+        // reset state variable values
         this.setState({new_id: '', new_location: ''})
 
         fetch('http://localhost:8080/products/locations', requestOptions)
@@ -63,8 +60,6 @@ class NewProductLocation extends React.Component {
     render(){
         return(
             <div className='new-data'>
-                <Navbar />
-
                 <form className='data-options container'>
                     <h2> Add a Location to a Product</h2>
                     <div className='row'>

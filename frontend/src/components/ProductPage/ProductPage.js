@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ProductCarousel from '../ProductCarousel/ProductCarousel'
+import ProductCarousel from './ProductCarousel/ProductCarousel'
 
 //import './App.css'
 

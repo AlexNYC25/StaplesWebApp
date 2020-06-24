@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "proxy": "http://localhost:8080",
   "private": true,
   "dependencies": {
@@ -12,12 +12,10 @@
     "bootstrap": "^4.5.0",
     "jquery": "^3.5.1",
     "material-ui": "^0.20.2",
-    "material-ui-dots": "^2.0.1",
     "popper": "^1.0.1",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-responsive-carousel": "^3.2.7",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "typescript": "^2.9.2"

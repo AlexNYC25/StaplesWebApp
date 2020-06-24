@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Button } from '@material-ui/core';
+import thumbnail from '../../../camera.png'
 
 
 
@@ -78,12 +79,12 @@ class ProductLayout extends React.Component{
 				  		{this.state.info.slice(0, this.state.counter).map(info => (
 							<div class="col-md-4">
 								<div class="card mb-4 shadow-sm">
-									<img class=" card-img-top" width="100%" height="225" aria-label="Placeholder: Thumbnail"
+									<img class=" card-img-top" width="100%" height="100%" aria-label="Placeholder: Thumbnail" alt="thumbnail"
 										src=
 										{
-											info.images != null
-											? info.images[0][0].thumbnail
-											: ''
+											info.thumbnails != null
+											? info.thumbnails[0]
+											: thumbnail
 										}
 									>
 									</img>

@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter} from 'react-router-dom'
+import {BrowserRouter} from 'react-router-dom';
 
-import App from './App';
-import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import * as serviceWorker from './serviceWorker';
+
+import App from './components/App/App';
+import NavBar from './components/Navabar.js/Navbar.js';
 
 import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
+    <NavBar/>
     <BrowserRouter>
       <App />
     </BrowserRouter>

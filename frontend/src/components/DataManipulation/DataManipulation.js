@@ -3,10 +3,7 @@ import { Button } from '@material-ui/core'
 
 
 class DataManipulation extends React.Component {
-    constructor(props){
-        super(props)
-    }
-
+    
     render() {
         return (
             <div className="data-options">

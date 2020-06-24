@@ -17,6 +17,7 @@ class ProductCarousel extends React.Component{
 
     }
 
+
     onchange(value){
         // restarts dots position
         if(this.props.Images){
@@ -47,8 +48,8 @@ class ProductCarousel extends React.Component{
                 >
                     {
                         this.props.Images
-                            ?this.props.Images.map(img => <img width="300px" height="150px" alt="product image" src={img}></img>)
-                            : <img  src='https://media.giphy.com/media/hEc4k5pN17GZq/giphy.gif' alt="default image"/>
+                            ?this.props.Images.map(img => <img width="300px" height="150px" alt={img.name} src={img}></img>)
+                            : <img  src='https://media.giphy.com/media/hEc4k5pN17GZq/giphy.gif' alt="Theres nothing here"/>
                     }
                 </Carousel>
                 
